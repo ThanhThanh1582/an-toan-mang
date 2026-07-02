@@ -3191,3 +3191,54 @@ html, body, .app-container {
   box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06) !important;
   color: #1E293B !important;
 }
+
+/* ==========================================================================
+   TIẾT 2: ENLARGED TYPOGRAPHY OVERRIDES (Phóng to chữ tất cả slide)
+   ========================================================================== */
+.slide .main-title,
+.slide-frame .main-title {
+  font-size: 32pt !important; /* Enlarged from 24pt */
+  font-weight: 900 !important;
+}
+
+.slide .sub-title,
+.slide-frame .sub-title {
+  font-size: 20pt !important; /* Enlarged from 15pt */
+  font-weight: 800 !important;
+}
+
+.slide p,
+.slide li,
+.slide td,
+.slide th,
+.slide div.text-desc,
+.slide-frame p,
+.slide-frame li,
+.slide-frame td,
+.slide-frame th {
+  font-size: 15pt !important; /* Enlarged from 11pt */
+  line-height: 1.5 !important;
+}
+
+.slide-frame .slide-header .slide-title {
+  font-size: 24pt !important; /* Enlarged from 18pt */
+  font-weight: 900 !important;
+}
+
+.slide .btn, .slide-frame .btn {
+  font-size: 13pt !important; /* Enlarged from 10.5pt */
+  padding: 10px 22px !important;
+  border-radius: 8px !important;
+}
+
+/* Adjust paddings to fit enlarged text */
+.slide-frame {
+  padding: 15px 25px !important;
+}
+.slide-content-container {
+  margin-top: 5px !important;
+}
+.welcome-illustration svg {
+  width: 140px !important;
+  height: 140px !important;
+}
