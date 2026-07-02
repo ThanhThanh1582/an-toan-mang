@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TIẾT 2: CHIẾN DỊCH TIÊM CHỦNG VACCINE MẠNG</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="puberty_style.css">
+  <link rel="stylesheet" href="tiet2.css">
+  <style>
+    /* Spotlight overlay styling */
+    .spotlight-dark-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 23, 42, 0.9);
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+    .spotlight-dark-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .spotlight-highlight {
+      position: relative;
+      z-index: 101 !important;
+      box-shadow: 0 0 50px rgba(255, 255, 255, 0.8) !important;
+      border: 3px solid #FFF !important;
+      transform: scale(1.05) !important;
+    }
+    
+    /* Chibi SVG floating animation */
+    .cartoon-illustration-svg {
+      filter: drop-shadow(0 10px 20px rgba(0,0,0,0.06));
+      animation: floatChibi 4s ease-in-out infinite;
+    }
+    @keyframes floatChibi {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    
+    /* Consequence row reveal */
+    .consequence-row {
+      transition: background 0.3s;
+    }
+    .consequence-row:hover {
+      background: rgba(2, 132, 199, 0.04);
+    }
+    
+    /* Accordion simulation */
+    .accordion-paper-simulation {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      perspective: 1000px;
+      margin-top: 20px;
+    }
+    .paper-fold {
+      width: 130px;
+      height: 200px;
+      background: #FFFFFF;
+      border: 1.5px solid rgba(15, 23, 42, 0.08);
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: #0F172A;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.04);
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .paper-fold:nth-child(odd) {
+      transform: rotateY(15deg) translateZ(10px);
+    }
+    .paper-fold:nth-child(even) {
+      transform: rotateY(-15deg) translateZ(10px);
+    }
+    .paper-fold.expanded {
+      transform: rotateY(0deg) scale(1.08) translateZ(20px) !important;
+      border-color: var(--cyan) !important;
+      box-shadow: 0 15px 35px var(--cyan-glow) !important;
+      background: #F0FDFA;
+      color: var(--cyan);
+    }
+    .paper-fold-icon {
+      font-size: 28pt;
+      margin-bottom: 10px;
+    }
+    
+    /* 3 golden shields */
+    .shield-card {
+      background: #FFFFFF;
+      border: 2px solid rgba(15, 23, 42, 0.06);
+      border-radius: 20px;
+      padding: 30px 20px;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.02);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .shield-card:hover {
+      transform: translateY(-8px);
+    }
+    .shield-card.active {
+      transform: scale(1.1);
+      background: #F8FAFC;
+    }
+    .shield-card.active.shield-red {
+      border-color: #EF4444 !important;
+      box-shadow: 0 15px 35px rgba(239, 68, 68, 0.25) !important;
+    }
+    .shield-card.active.shield-orange {
+      border-color: #F97316 !important;
+      box-shadow: 0 15px 35px rgba(249, 115, 22, 0.25) !important;
+    }
+    .shield-card.active.shield-green {
+      border-color: #10B981 !important;
+      box-shadow: 0 15px 35px rgba(16, 185, 129, 0.25) !important;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- ==========================================
+         LEFT SIDEBAR: SLIDE MENU
+         ========================================== -->
+    <aside class="sidebar" id="app-sidebar-left">
+      <div class="sidebar-header" style="display:flex; justify-content:space-between; align-items:center; width:100%; box-sizing:border-box;">
+        <div class="clinic-logo" style="display:flex; align-items:center; gap:8px;">
+          <div class="pulse-cross" style="color:#22C55E !important; font-size:18pt; font-weight:bold; animation: pulse-glow 1.5s infinite alternate;">✚</div>
+          <div style="font-family:'Montserrat',sans-serif; font-weight:900; color:#0F172A; line-height:1.2; font-size:11pt;">
+            NOVA HOSPITAL
+            <span style="display:block; font-size:7.5pt; font-weight:800; color:#64748B; letter-spacing:0.5px;">CYBER SAFETY v1.0</span>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span class="online-badge" style="font-size:7.5pt; font-weight:800; color:#16A34A; background:#DCFCE7; border:1px solid #BBF7D0; padding:2px 8px; border-radius:20px; display:inline-flex; align-items:center; gap:4px; font-family:'Inter',sans-serif;">● ONLINE</span>
+          <button class="control-btn" onclick="toggleLeftSidebar()" title="Thu gọn" style="background:none; border:none; color:#64748B; cursor:pointer; padding:5px; font-size:10pt;"><i class="fa-solid fa-chevron-left"></i></button>
+        </div>
+      </div>
+      
+      <div class="sidebar-nav-viewport">
+        <nav class="sidebar-nav-menu">
+          
+          <div class="nav-group">
+            <div class="nav-group-title">🚀 Hoạt động 1: Khởi động</div>
+            <ul class="nav-list">
+              <li class="slide-item active" data-slide="1"><span class="nav-num">1</span> <span class="nav-txt">Trạm mở đầu</span></li>
+              <li class="slide-item" data-slide="2"><span class="nav-num">2</span> <span class="nav-txt">Câu hỏi chính</span></li>
+              <li class="slide-item" data-slide="3"><span class="nav-num">3</span> <span class="nav-txt">Mục tiêu chiến dịch</span></li>
+              <li class="slide-item" data-slide="4"><span class="nav-num">4</span> <span class="nav-txt">Chuẩn bị đạo cụ</span></li>
+              <li class="slide-item" data-slide="5"><span class="nav-num">5</span> <span class="nav-txt">10s khởi động</span></li>
+              <li class="slide-item" data-slide="6"><span class="nav-num">6</span> <span class="nav-txt">Lộ trình học tập</span></li>
+              <li class="slide-item" data-slide="7"><span class="nav-num">7</span> <span class="nav-txt">Báo động khẩn</span></li>
+              <li class="slide-item" data-slide="8"><span class="nav-num">8</span> <span class="nav-txt">Ca bệnh 01 - Tú</span></li>
+              <li class="slide-item" data-slide="9"><span class="nav-num">9</span> <span class="nav-txt">Ca bệnh 02 - Vy</span></li>
+              <li class="slide-item" data-slide="10"><span class="nav-num">10</span> <span class="nav-txt">Ca bệnh 03 - Nam</span></li>
+              <li class="slide-item" data-slide="11"><span class="nav-num">11</span> <span class="nav-txt">Tổng kết lâm sàng</span></li>
+            </ul>
+          </div>
+
+          <div class="nav-group">
+            <div class="nav-group-title">🔍 Hoạt động 2: Khám bệnh</div>
+            <ul class="nav-list">
+              <li class="slide-item" data-slide="12"><span class="nav-num">12</span> <span class="nav-txt">Thử thách 2: Bản đồ</span></li>
+              <li class="slide-item" data-slide="13"><span class="nav-num">13</span> <span class="nav-txt">Từ điển virus Cyber</span></li>
+              <li class="slide-item" data-slide="14"><span class="nav-num">14</span> <span class="nav-txt">Game: Phân loại</span></li>
+              <li class="slide-item" data-slide="15"><span class="nav-num">15</span> <span class="nav-txt">6 phút thảo luận</span></li>
+              <li class="slide-item" data-slide="16"><span class="nav-num">16</span> <span class="nav-txt">Hội đồng xác thực</span></li>
+              <li class="slide-item" data-slide="17"><span class="nav-num">17</span> <span class="nav-txt">Phác đồ chuẩn 5 bước</span></li>
+            </ul>
+          </div>
+
+          <div class="nav-group">
+            <div class="nav-group-title">🛠️ Hoạt động 3: Chế tạo</div>
+            <ul class="nav-list">
+              <li class="slide-item" data-slide="18"><span class="nav-num">18</span> <span class="nav-txt">Kỹ thuật gấp giấy</span></li>
+              <li class="slide-item" data-slide="19"><span class="nav-num">19</span> <span class="nav-txt">9 phút thi công</span></li>
+            </ul>
+          </div>
+
+          <div class="nav-group">
+            <div class="nav-group-title">📝 Hoạt động 4: Cam kết</div>
+            <ul class="nav-list">
+              <li class="slide-item" data-slide="20"><span class="nav-num">20</span> <span class="nav-txt">Spotlight thuyết trình</span></li>
+              <li class="slide-item" data-slide="21"><span class="nav-num">21</span> <span class="nav-txt">Nhật ký phản chiếu</span></li>
+              <li class="slide-item" data-slide="22"><span class="nav-num">22</span> <span class="nav-txt">3 Nguyên tắc vàng</span></li>
+              <li class="slide-item" data-slide="23"><span class="nav-num">23</span> <span class="nav-txt">Ký cam kết Vaccine</span></li>
+              <li class="slide-item" data-slide="24"><span class="nav-num">24</span> <span class="nav-txt">Hoàn thành nhiệm vụ</span></li>
+            </ul>
+          </div>
+
+        </nav>
+      </div>
+    </aside>
+
+    <!-- ==========================================
+         TOP BAR: STAGE & ROLE BADGES
+         ========================================== -->
+    <header class="top-bar">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <button class="control-btn" id="btn-toggle-left-sidebar" title="Ẩn/Hiện Sidebar Trái">☰</button>
+        <a href="index.html" class="control-btn" title="Quay lại Cổng điều hành" style="text-decoration:none;"><i class="fa-solid fa-house"></i></a>
+        <div class="active-stage-indicator" id="current-stage-display">
+          TRẠM 1: KHỞI ĐỘNG (ĐO MẦM BỆNH)
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 15px;">
+        <div class="role-badge" id="header-role-badge">Bác sĩ Cộng đồng</div>
+        <button class="control-btn" id="btn-sound-toggle" title="Tắt/Bật Âm thanh"><i class="fa-solid fa-volume-high"></i></button>
+        <button class="control-btn" id="btn-toggle-fullscreen" title="Phóng to Toàn màn hình"><i class="fa-solid fa-expand"></i></button>
+        <button class="control-btn" id="btn-toggle-right-sidebar" title="Ẩn/Hiện Giáo án"><i class="fa-solid fa-graduation-cap"></i></button>
+      </div>
+    </header>
+
+    <!-- ==========================================
+         RIGHT SIDEBAR: TEACHER METHODOLOGY GUIDE
+         ========================================== -->
+    <aside class="sidebar-right" id="app-sidebar-right">
+      <div class="sidebar-header-right" style="display:flex; justify-content:space-between; align-items:center; padding: 15px 20px; border-bottom:1px solid rgba(15,23,42,0.08);">
+        <h3 style="margin:0;">Giáo Án Bác Sĩ Nova</h3>
+        <button class="control-btn" onclick="toggleRightSidebar()" title="Thu gọn" style="background:none; border:none; color:inherit; cursor:pointer; padding:5px;"><i class="fa-solid fa-chevron-right"></i></button>
+      </div>
+      <div class="sidebar-right-viewport">
+        <div class="lesson-plan-content" id="lesson-plan-content-viewport">
+          <!-- Populated dynamically by JS -->
+        </div>
+      </div>
+    </aside>
+
+    <!-- ==========================================
+         MAIN WORKSPACE: PRESENTATION VIEWPORT
+         ========================================== -->
+    <main class="slides-viewport" id="app-slides-viewport">
+      
+      <!-- Spotlight overlay for slide 20 -->
+      <div class="spotlight-dark-overlay" id="spotlight-dark-overlay"></div>
+
+      <!-- Slide 1 — Trạm mở đầu -->
+      <section class="slide active" id="slide-1" data-stage="TRẠM 1: KHỞI ĐỘNG (ĐO MẦM BỆNH)" data-role="Bác sĩ Cộng đồng">
+        <div class="slide-layout flex-center-col text-center">
+          <div class="slide-frame">
+            <div class="slide-header">
+              <span class="breadcrumb">Nova Cyber Hospital &bull; Giới thiệu</span>
+              <h2 class="slide-title">CHIẾN DỊCH TIÊM CHỦNG VACCINE MẠNG</h2>
+            </div>
+            <div class="slide-content-container">
+              <div class="grid-2col" style="flex: 1; align-items: stretch; text-align: left;">
+                <div class="welcome-left" style="display:flex; flex-direction:column; justify-content:center;">
+                  <div class="medical-cross-decor" style="color: var(--cyan); font-size:32pt; margin-bottom:10px;">✚</div>
+                  <h1 class="welcome-title-h1" style="font-size:28pt; line-height:1.3; font-weight:900; margin-bottom:15px; color:#0F172A;">
+                    KHI BÌ LÀM KHÓ CHỊU TRÊN MẠNG, <span style="color: var(--cyan);">EM CẦN LÀM GÌ?</span>
+                  </h1>
+                  <div class="welcome-info-card" style="background: rgba(15,23,42,0.03); padding:15px 20px; border-radius:12px; border-left:4px solid var(--cyan);">
+                    <p style="font-size:11pt; margin-bottom:6px; color:#475569;">Vai đóng: <strong>Bác sĩ Cộng đồng (Community Cyber Doctor)</strong></p>
+                    <p style="font-size:11pt; color:#475569;">Tiết học: <strong>Tiết 2 — Chiến dịch Tiêm chủng Vaccine Mạng</strong></p>
+                  </div>
+                </div>
+                <div class="welcome-illustration flex-center">
+                  <!-- Cartoon SVG Doctor Robot -->
+                  <svg class="cartoon-illustration-svg" viewBox="0 0 200 200" style="width: 230px; height: 230px;">
+                    <circle cx="100" cy="100" r="80" fill="#E0F2FE" opacity="0.6"/>
+                    <rect x="80" y="140" width="40" height="30" rx="5" fill="#64748B"/>
+                    <ellipse cx="100" cy="170" rx="35" ry="10" fill="#475569"/>
+                    <rect x="40" y="50" width="120" height="100" rx="15" fill="#334155" stroke="#1E293B" stroke-width="6"/>
+                    <rect x="48" y="58" width="104" height="74" rx="8" fill="#0F172A"/>
+                    <path d="M 52,95 L 75,95 L 82,75 L 90,115 L 98,90 L 105,100 L 112,95 L 148,95" fill="none" stroke="#06B6D4" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="70" cy="75" r="5" fill="#22C55E" />
+                    <circle cx="130" cy="75" r="5" fill="#22C55E" />
+                    <rect x="85" y="32" width="30" height="8" rx="2" fill="#94A3B8"/>
+                    <circle cx="100" cy="36" r="14" fill="#E2E8F0" stroke="#475569" stroke-width="3"/>
+                    <circle cx="100" cy="36" r="6" fill="#FFFFFF"/>
+                  </svg>
+                </div>
+              </div>
+              
+              <div style="margin-top: 30px; text-align: center;">
+                <button class="btn btn-cyan btn-pulse" onclick="navigateNext()" style="font-size:14pt; padding:15px 35px; font-weight:800; text-transform:uppercase; letter-spacing:0.5px;">BẮT ĐẦU CA TRỰC <i class="fa-solid fa-arrow-right"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 2 — Câu hỏi lớn -->
+      <section class="slide" id="slide-2" data-stage="TRẠM 1: KHỞI ĐỘNG (ĐO MẦM BỆNH)" data-role="Bác sĩ Cộng đồng">
+        <div class="slide-layout flex-center-col text-center">
+          <div class="slide-frame" style="max-width: 1000px;">
+            <div class="slide-header">
+              <span class="breadcrumb">Nova Cyber Hospital &bull; Câu hỏi lớn</span>
+              <h2 class="slide-title">CÂU HỎI LỚN CỦA BÀI HỌC</h2>
+            </div>
+            <div class="slide-content-container flex-center-col">
+              <div class="glass-panel" style="padding: 3rem; margin-top: 2rem; border-radius: 16px; border: 2.5px dashed #0284C7; background: rgba(2, 132, 199, 0.05); text-align: center; min-height: 180px; display: flex; align-items: center; justify-content: center; width: 100%;">
+                <p id="s2-typewriter-text" style="font-size: 26pt !important; font-weight: 900; color: #0284C7; line-height: 1.6; text-transform: uppercase; white-space: pre-wrap; width: 100%;">
+                  <!-- Typed by JS -->
+                </p>
+              </div>
+              <div style="margin-top: 4rem;">
+                <button class="btn btn-cyan" onclick="navigateNext()" style="padding: 14px 28px; font-size: 16pt !important; font-weight: 800; text-transform:uppercase;">TIẾP THEO <i class="fa-solid fa-arrow-right"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 3 — Mục tiêu chiến dịch -->
+      <section class="slide" id="slide-3" data-stage="TRẠM 1: KHỞI ĐỘNG (ĐO MẦM BỆNH)" data-role="Bác sĩ Cộng đồng">
+        <div class="slide-layout flex-center-col text-center">
+          <div class="slide-frame">
+            <div class="slide-header">
+              <span class="breadcrumb">Hồ sơ chuyên môn</span>
+              <h2 class="slide-title">MỤC TIÊU CHIẾN DỊCH</h2>
+            </div>
+            <div class="slide-content-container">
+              <div class="grid-2col" style="align-items: center; text-align: left;">
+                <div style="display:flex; flex-direction:column; gap:15px;">
+                  <div class="glass-panel" style="border-left:4px solid var(--cyan); padding:15px;">
+                    <h4 style="color: var(--cyan); font-weight:800; margin-bottom:5px;">🧠 KIẾN THỨC</h4>
+                    <p style="font-size:11pt; color: #475569;">Đánh giá các mức độ nguy hiểm của hành vi quấy rối; khắc sâu 5 vấn đề hay gặp và Sơ đồ xử lý 5 bước chuẩn y khoa.</p>
+                  </div>
+                  <div class="glass-panel" style="border-left:4px solid var(--pink); padding:15px;">
+                    <h4 style="color: var(--pink); font-weight:800; margin-bottom:5px;">✂️ KỸ NĂNG</h4>
+                    <p style="font-size:11pt; color: #475569;">Phân tích, phân loại thói quen Đúng/Sai; khéo léo chế tạo Thẻ gập biến hình 5 nếp gập Accordion.</p>
+                  </div>
+                  <div class="glass-panel" style="border-left:4px solid var(--mint); padding:15px;">
+                    <h4 style="color: var(--mint); font-weight:800; margin-bottom:5px;">🤝 THÁI ĐỘ</h4>
+                    <p style="font-size:11pt; color: #475569;">Tỉnh táo, ứng phó khoa học, có trách nhiệm ký cam kết lan tỏa giải pháp an toàn tới trường học.</p>
+                  </div>
+                </div>
+                
+                <div class="flex-center-col">
+                  <!-- Cartoon Syringe SVG -->
+                  <svg class="cartoon-illustration-svg" viewBox="0 0 100 100" style="width:180px; height:180px;">
+                    <circle cx="50" cy="50" r="45" fill="#FCE7F3" />
+                    <path d="M50,18 L70,26 L70,50 C70,62 50,75 50,75 C50,75 30,62 30,50 L30,26 Z" fill="#DB2777" opacity="0.15" />
+                    <rect x="46" y="25" width="8" height="35" rx="1" fill="#FFFFFF" stroke="#DB2777" stroke-width="3" />
+                    <line x1="50" y1="25" x2="50" y2="12" stroke="#475569" stroke-width="3" />
+                    <line x1="45" y1="12" x2="55" y2="12" stroke="#475569" stroke-width="3" stroke-linecap="round" />
+                    <line x1="50" y1="60" x2="50" y2="72" stroke="#64748B" stroke-width="2" />
+                    <circle cx="50" cy="80" r="3" fill="#0284C7" />
+                    <circle cx="43" cy="74" r="2" fill="#0284C7" />
+                    <circle cx="57" cy="76" r="2" fill="#0284C7" />
+                    <rect x="48" y="38" width="4" height="10" fill="#DB2777" />
+                    <rect x="45" y="41" width="10" height="4" fill="#DB2777" />
+                  </svg>
+                </div>
+              </div>
+              <div style="margin-top: 30px; text-align: center;">
+                <button class="btn btn-cyan btn-pulse" onclick="navigateNext()" style="font-size:13pt; padding:12px 28px; font-weight:800;">KHỞI ĐỘNG CA TRỰC <i class="fa-solid fa-play"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 4 — Chuẩn bị đạo cụ -->
+      <section class="slide" id="slide-4" data-stage="TRẠM 1: KHỞI ĐỘNG (ĐO MẦM BỆNH)" data-role="Bác sĩ Cộng đồng">
+        <div class="slide-layout flex-center-col text-center">
+          <div class="slide-frame">
+            <div class="slide-header">
+              <span class="breadcrumb">Chuẩn bị trước ca trực</span>
+              <h2 class="slide-title">CHUẨN BỊ ĐẠO CỤ Y KHOA</h2>
+            </div>
+            <div class="slide-content-container">
+              <div class="grid-2col" style="text-align: left; align-items: stretch;">
+                <div class="glass-panel" style="border-left:4px solid var(--purple); padding:20px; display:flex; flex-direction:column; justify-content:space-between;">
+                  <div>
+                    <h4 style="color:var(--purple); font-weight:800; font-size:13pt; margin-bottom:10px;"><i class="fa-solid fa-people-group"></i> ĐẠO CỤ NHÓM</h4>
+                    <ul style="padding-left:20px; font-size:11pt; color:#475569; display:flex; flex-direction:column; gap:8px;">
+                      <li>Bộ 3 thẻ màu chẩn đoán (🟡 Vàng - 🟠 Cam - 🔴 Đỏ)</li>
+                      <li>Sơ đồ phân loại Lối đi A3</li>
+                      <li>Tập 10 Thẻ Hành Động ứng xử mạng</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="glass-panel" style="border-left:4px solid var(--cyan); padding:20px; display:flex; flex-direction:column; justify-content:space-between;">
+                  <div>
+                    <h4 style="color:var(--cyan); font-weight:800; font-size:13pt; margin-bottom:10px;"><i class="fa-solid fa-user-doctor"></i> ĐẠO CỤ CÁ NHÂN</h4>
+                    <ul style="padding-left:20px; font-size:11pt; color:#475569; display:flex; flex-direction:column; gap:8px;">
+                      <li>Dải giấy bìa dài (để xếp Accordion)</li>
+                      <li>Thước kẻ, kéo thủ công, bút chì, màu vẽ</li>
+                      <li>Sổ tay Nhật ký Bác sĩ & Sticker Vaccine</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Medical Tray SVG -->
+              <div style="margin-top: 20px; display: flex; justify-content: center;">
+                <svg class="cartoon-illustration-svg" viewBox="0 0 200 100" style="width: 250px; height: 100px;">
+                  <rect x="10" y="40" width="180" height="50" rx="10" fill="#E2E8F0" stroke="#94A3B8" stroke-width="4"/>
+                  <!-- Notebook -->
+                  <rect x="25" y="48" width="40" height="30" rx="3" fill="#38BDF8" transform="rotate(-5, 45, 63)"/>
+                  <rect x="29" y="52" width="32" height="22" fill="#FFFFFF" transform="rotate(-5, 45, 63)"/>
+                  <!-- Scissors -->
+                  <circle cx="85" cy="55" r="8" fill="none" stroke="#EF4444" stroke-width="3"/>
+                  <circle cx="95" cy="62" r="8" fill="none" stroke="#EF4444" stroke-width="3"/>
+                  <line x1="90" y1="58" x2="120" y2="78" stroke="#94A3B8" stroke-width="4" stroke-linecap="round"/>
+                  <line x1="97" y1="62" x2="125" y2="74" stroke="#94A3B8" stroke-width="4" stroke-linecap="round"/>
+                  <!-- Color Cards -->
+                  <rect x="135" y="45" width="20" height="30" rx="2" fill="#FBBF24" transform="rotate(10, 145, 60)"/>
+                  <rect x="145" y="48" width="20" height="30" rx="2" fill="#F97316" transform="rotate(20, 155, 63)"/>
+                  <rect x="155" y="53" width="20" height="30" rx="2" fill="#EF4444" transform="rotate(30, 165, 68)"/>
+                </svg>
+              </div>
+
+              <div style="margin-top: 20px; text-align: center;">
+                <button class="btn btn-cyan" onclick="navigateNext()" style="font-size:13pt; padding:12px 28px; font-weight:800; text-transform:uppercase;">ĐÃ CHUẨN BỊ XONG <i class="fa-solid fa-check"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 5 — 10s khởi động kíp trực -->
+      <section class="slide" id="slide-5" data-stage="TRẠM 1: KHỞI ĐỘNG (ĐO MẦM BỆNH)" data-role="Bác sĩ Cộng đồng">
+        <div class="slide-layout flex-center-col text-center">
+          <div class="slide-frame" style="max-width: 800px;">
+            <div class="slide-header">
+              <span class="breadcrumb">Định lượng thời gian chuẩn bị</span>
+              <h2 class="slide-title">10 GIÂY KHỞI ĐỘNG KÍP TRỰC</h2>
+            </div>
+            <div class="slide-content-container flex-center-col">
+              <p style="font-size: 14pt; color:#475569; line-height:1.6; margin-bottom: 30px;">
+                Trưởng khoa chỉ thị: <strong>"Yêu cầu toàn bộ các kíp trực ổn định vị trí nhóm học tập, đặt toàn bộ dụng cụ lâm sàng lên bàn. 10 giây chuẩn bị bắt đầu!"</strong>
+              </p>
+              
+              <div class="glass-panel flex-center-col" style="padding: 40px; width: 100%; max-width: 450px; background: rgba(2, 132, 199, 0.03); border: 2px dashed rgba(2, 132, 199, 0.2); border-radius: 20px;">
+                <div class="ecg-timer-number" id="s5-timer-display" style="font-size: 64pt !important; font-family: monospace; font-weight:900; color: var(--cyan); text-shadow: 0 0 15px var(--cyan-glow);">10s</div>
+                <button class="btn btn-cyan btn-pulse" id="s5-start-timer-btn" onclick="startS5Timer()" style="margin-top:25px; font-size:12pt; padding:10px 24px; font-weight:800;">⚡ BẮT ĐẦU ĐẾM NGƯỢC</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 6 — Lộ trình học tập -->
+      <section class="slide" id="slide-6" data-stage="TRẠM 1: KHỞI ĐỘNG (ĐO MẦM BỆNH)" data-role="Bác sĩ Cộng đồng">
+        <div class="slide-layout flex-center-col text-center">
+          <div class="slide-frame">
+            <div class="slide-header">
+              <span class="breadcrumb">Tổng quan bản đồ hoạt động</span>
+              <h2 class="slide-title">LỘ TRÌNH KHÁM LÂM SÀNG CHIẾN DỊCH</h2>
+            </div>
+            <div class="slide-content-container flex-center-col" style="justify-content: space-evenly; flex: 1;">
+              <p style="font-size:13pt; color:#64748B;">Bấm vào từng Trạm chặng bên dưới để định vị nội dung điều hành:</p>
+              
+              <div class="timeline-ecg-container" style="margin-top: 30px; position:relative; width:100%; max-width: 900px;">
+                <svg class="ecg-line-svg" viewBox="0 0 1000 120" style="width:100%; height:120px;">
+                  <path class="ecg-track-path" d="M 0,60 Q 150,60 200,60 L 220,20 L 240,100 L 260,60 Q 400,60 500,60 L 520,10 L 545,110 L 570,60 Q 750,60 1000,60" fill="none" stroke="rgba(15,23,42,0.06)" stroke-width="4"/>
+                  <path class="ecg-active-path" d="M 0,60 Q 150,60 200,60 L 220,20 L 240,100 L 260,60 Q 400,60 500,60 L 520,10 L 545,110 L 570,60 Q 750,60 1000,60" fill="none" stroke="var(--cyan)" stroke-width="4" stroke-dasharray="1000" stroke-dashoffset="0" style="animation: flow 10s linear infinite;"/>
+                </svg>
+                
+                <div class="timeline-nodes" style="display:flex; justify-content:space-between; position:absolute; width:100%; top:25px; left:0; padding:0 30px; box-sizing:border-box;">
+                  <!-- Node 1 -->
+                  <div class="timeline-milestone active" onclick="revealRoadmapPopup(1)" style="cursor:pointer; display:flex; flex-direction:column; align-items:center; width:20%;">
+                    <div class="milestone-node-circle" style="width:45px; height:45px; border-radius:50%; background:var(--cyan); color:#FFF; display:flex; align-items:center; justify-content:center; font-weight:bold; box-shadow:0 0 15px var(--cyan-glow); animation:pulse-glow 1.5s infinite alternate;"><i class="fa-solid fa-stethoscope"></i></div>
+                    <span style="font-size:10pt; font-weight:800; margin-top:8px; color:#0F172A;">TRẠM 1</span>
+                    <span style="font-size:8pt; color:#64748B;">Khởi động (Đo mầm bệnh)</span>
+                  </div>
+                  <!-- Node 2 -->
+                  <div class="timeline-milestone" onclick="revealRoadmapPopup(2)" style="cursor:pointer; display:flex; flex-direction:column; align-items:center; width:20%;">
+                    <div class="milestone-node-circle" style="width:45px; height:45px; border-radius:50%; background:#94A3B8; color:#FFF; display:flex; align-items:center; justify-content:center; font-weight:bold;"><i class="fa-solid fa-paste"></i></div>
+                    <span style="font-size:10pt; font-weight:800; margin-top:8px; color:#0F172A;">TRẠM 2</span>
+                    <span style="font-size:8pt; color:#64748B;">Lâm sàng (Phân loại)</span>
+                  </div>
+                  <!-- Node 3 -->
+                  <div class="timeline-milestone" onclick="revealRoadmapPopup(3)" style="cursor:pointer; display:flex; flex-direction:column; align-items:center; width:20%;">
+                    <div class="milestone-node-circle" style="width:45px; height:45px; border-radius:50%; background:#94A3B8; color:#FFF; display:flex; align-items:center; justify-content:center; font-weight:bold;"><i class="fa-solid fa-scissors"></i></div>
+                    <span style="font-size:10pt; font-weight:800; margin-top:8px; color:#0F172A;">TRẠM 3</span>
+                    <span style="font-size:8pt; color:#64748B;">Chế tạo (Thẻ gập)</span>
+                  </div>
+                  <!-- Node 4 -->
+                  <div class="timeline-milestone" onclick="revealRoadmapPopup(4)" style="cursor:pointer; display:flex; flex-direction:column; align-items:center; width:20%;">
+                    <div class="milestone-node-circle" style="width:45px; height:45px; border-radius:50%; background:#94A3B8; color:#FFF; display:flex; align-items:center; justify-content:center; font-weight:bold;"><i class="fa-solid fa-file-contract"></i></div>
+                    <span style="font-size:10pt; font-weight:800; margin-top:8px; color:#0F172A;">TRẠM 4</span>
+                    <span style="font-size:8pt; color:#64748B;">Cam kết (Ký Vaccine)</span>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Popup container for roadmap descriptions -->
+              <div class="glass-panel" id="s6-description-box" style="margin-top: 40px; padding: 20px; width: 100%; max-width: 750px; min-height: 80px; text-align: left; border-left:4px solid var(--cyan);">
+                <p style="font-size: 11pt; color: #475569; font-weight:700; margin:0;" id="s6-description-text">
+                  👉 Bấm vào các nút Trạm ở sơ đồ lộ trình nhịp tim phía trên để xem chi tiết hoạt động của từng chặng thi đua.
+                </p>
+              </div>
+
+              <div style="margin-top: 20px;">
+                <button class="btn btn-cyan" onclick="navigateNext()" style="font-size:12pt; padding:12px 28px; font-weight:800; text-transform:uppercase;">TIẾN VÀO TRẠM 1 <i class="fa-solid fa-arrow-right"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 7 — Báo động đỏ khẩn cấp -->
+      <section class="slide" id="slide-7" data-stage="TRẠM 1: KHỞI ĐỘNG (ĐO MẦM BỆNH)" data-role="Bác sĩ Cộng đồng" style="background: rgba(239, 68, 68, 0.02);">
+        <div class="slide-layout flex-center-col text-center">
+          <div class="slide-frame" style="border-left-color: #EF4444 !important; box-shadow: 0 10px 40px rgba(239, 68, 68, 0.15) !important;">
+            <div class="slide-header">
+              <span class="breadcrumb" style="color: #EF4444 !important;">🚨 Cảnh báo hệ thống cấp cứu</span>
+              <h2 class="slide-title" style="color: #B91C1C !important; font-weight:900;">THÔNG BÁO BÁO ĐỘNG KHẨN</h2>
+            </div>
+            <div class="slide-content-container flex-center-col">
+              <div class="welcome-illustration flex-center" style="margin-bottom: 25px;">
+                <!-- Flashing red cross siren SVG -->
+                <svg class="cartoon-illustration-svg" viewBox="0 0 100 100" style="width: 140px; height: 140px;">
+                  <circle cx="50" cy="50" r="45" fill="#FEE2E2" stroke="#EF4444" stroke-width="4" style="animation: pulse-glow 1s infinite alternate;"/>
+                  <rect x="43" y="25" width="14" height="50" rx="3" fill="#EF4444"/>
+                  <rect x="25" y="43" width="50" height="14" rx="3" fill="#EF4444"/>
+                  <!-- Siren rays -->
+                  <line x1="50" y1="15" x2="50" y2="5" stroke="#EF4444" stroke-width="4" stroke-linecap="round" />
+                  <line x1="20" y1="30" x2="10" y2="24" stroke="#EF4444" stroke-width="4" stroke-linecap="round" />
+                  <line x1="80" y1="30" x2="90" y2="24" stroke="#EF4444" stroke-width="4" stroke-linecap="round" />
+                </svg>
+              </div>
+              
+              <div class="glass-panel" style="padding: 25px; border-left:4px solid #EF4444; background: rgba(239, 68, 68, 0.05); text-align: left; max-width:700px;">
+                <h4 style="color:#B91C1C; font-weight:900; margin-bottom:8px; font-size:13pt;">🚨 PHÁT HIỆN MẦM BỆNH QUẤY RỐI!</h4>
+                <p style="font-size:12pt; color:#7F1D1D; line-height:1.6;">
+                  Trưởng khoa báo cáo: <strong>"Báo động đỏ khẩn cấp từ bệnh viện! Hệ thống ghi nhận có 3 ca bệnh học đường mới nhập viện do bị quấy rối trực tuyến. Các kíp trực chuẩn bị Thẻ màu để quét triệu chứng ban đầu!"</strong>
+                </p>
+              </div>
+              
+              <div style="margin-top: 35px;">
+                <button class="btn" onclick="navigateNext()" style="background:#EF4444; color:#FFF; font-size:13pt; padding:12px 28px; font-weight:800; border-radius:8px; box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);">TIẾN HÀNH ĐO LƯỜNG <i class="fa-solid fa-wave-square"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 8 — Ca bệnh 1: Tú -->
+      <section class="slide" id="slide-8" data-stage="TRẠM 1: KHỞI ĐỘNG (ĐO MẦM BỆNH)" data-role="Bác sĩ Cộng đồng">
+        <div class="slide-layout flex-center-col text-center">
+          <div class="slide-frame">
+            <div class="slide-header">
+              <span class="breadcrumb">Bệnh án quét triệu chứng 01</span>
+              <h2 class="slide-title">CA BỆNH 01 — BẠN TÚ</h2>
+            </div>
+            <div class="slide-content-container">
+              <div class="grid-2col" style="text-align: left; align-items: center;">
+                <div>
+                  <div class="glass-panel" style="border-left: 4px solid var(--amber); margin-bottom: 20px;">
+                    <h4 style="color:var(--amber); font-weight:800; font-size:12pt; margin-bottom:5px;">📋 HỒ SƠ LÂM SÀNG</h4>
+                    <p style="font-size:11pt; color:#475569; line-height:1.5;">Bạn Tú liên tục nhận được một loạt các tin nhắn Messenger nặc danh từ tài khoản lạ bêu rếu với các từ ngữ thô tục.</p>
+                  </div>
+                  
+                  <!-- Messenger Chat Mockup -->
+                  <div class="chat-mockup-container" style="background:#F1F5F9; border-radius:12px; padding:15px; border:1px solid #E2E8F0; display:flex; flex-direction:column; gap:10px;">
+                    <div class="chat-header" style="display:flex; align-items:center; gap:8px; border-bottom:1px solid #CBD5E1; padding-bottom:8px;">
+                      <div style="width:30px; height:30px; border-radius:50%; background:#94A3B8; color:#FFF; display:flex; align-items:center; justify-content:center; font-size:10pt;"><i class="fa-solid fa-user-secret"></i></div>
+                      <span style="font-size:10pt; font-weight:800; color:#1E293B;">Người dùng ẩn danh</span>
+                    </div>
+                    <div style="background:#E2E8F0; color:#1E293B; padding:10px 14px; border-radius:12px; align-self:flex-start; font-size:10pt; max-width:85%;">
+                      Mày là kẻ vô dụng, không ai thích mày đâu! 😡
+                    </div>
+                    <div style="background:#E2E8F0; color:#1E293B; padding:10px 14px; border-radius:12px; align-self:flex-start; font-size:10pt; max-width:85%;">
+                      Nếu ngày mai không mang bài tập cho tao chép thì coi chừng tài khoản game của mày bay màu!
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="flex-center-col" style="text-align: center;">
+                  <p style="font-size:12pt; font-weight:700; color:#1E293B; margin-bottom:15px;">Theo bác sĩ, Tú đang cảm thấy thế nào?<br>Bạn đánh giá ca này ở Thẻ màu nào?</p>
+                  
+                  <button class="btn btn-amber btn-pulse" id="btn-diagnose-8" onclick="revealDiagnosis(8)" style="font-size:12pt; font-weight:800; padding:10px 24px; border-radius:8px;">🔍 CHẨN ĐOÁN LÂM SÀNG</button>
+                  
+                  <div class="diagnosis-card hidden" id="diagnosis-card-8" style="margin-top:20px; padding:15px 20px; border-radius:10px; background:#FEF08A; border:2px solid #CA8A04; color:#854D0E; font-weight:900; font-size:13pt; display:inline-flex; align-items:center; gap:8px;">
+                    🟡 THẺ VÀNG (Nguy hại nhẹ - Theo dõi sát, cảm xúc Tú bị tổn thương)
+                  </div>
+                </div>
+              </div>
+              <div style="margin-top: 30px; text-align: center;">
+                <button class="btn btn-cyan" onclick="navigateNext()" style="font-size:11pt; padding:10px 24px; font-weight:800;">CA TIẾP THEO <i class="fa-solid fa-arrow-right"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 9 — Ca bệnh 2: Vy -->
+      <section class="slide" id="slide-9" data-stage="TRẠM 1: KHỞI ĐỘNG (ĐO MẦM BỆNH)" data-role="Bác sĩ Cộng đồng">
+        <div class="slide-layout flex-center-col text-center">
+          <div class="slide-frame">
+            <div class="slide-header">
+              <span class="breadcrumb">Bệnh án quét triệu chứng 02</span>
+              <h2 class="slide-title">CA BỆNH 02 — BẠN VY</h2>
+            </div>
+            <div class="slide-content-container">
+              <div class="grid-2col" style="text-align: left; align-items: center;">
+                <div>
+                  <div class="glass-panel" style="border-left: 4px solid var(--orange); margin-bottom: 20px;">
+                    <h4 style="color:var(--orange); font-weight:800; font-size:12pt; margin-bottom:5px;">📋 HỒ SƠ LÂM SÀNG</h4>
+                    <p style="font-size:11pt; color:#475569; line-height:1.5;">Một bài đăng ẩn danh xuất hiện trong nhóm Facebook trường học bôi nhọ danh dự Vy mà hoàn toàn không có bằng chứng đối chất thực tế.</p>
+                  </div>
+                  
+                  <!-- Facebook Post Mockup -->
+                  <div class="fb-post-mock" style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:12px; padding:15px; display:flex; flex-direction:column; gap:10px;">
+                    <div class="fb-header" style="display:flex; align-items:center; gap:10px;">
+                      <div style="width:34px; height:34px; border-radius:50%; background:#1E3A8A; color:#FFF; display:flex; align-items:center; justify-content:center; font-size:12pt;"><i class="fa-solid fa-user-secret"></i></div>
+                      <div>
+                        <div style="font-size:10pt; font-weight:900; color:#1E293B;">Góc ẩn danh - School Confessions</div>
+                        <div style="font-size:8pt; color:#64748B;">2 giờ trước &bull; 🌐</div>
+                      </div>
+                    </div>
+                    <p style="font-size:10pt; color:#334155; line-height:1.5; margin:0;">
+                      Nghe nói bạn Vy lớp 6A gian lận trong kì thi học kỳ vừa rồi đó mọi người... Nhìn hiền lành thế mà không ngờ được! 🤫👎 #gianlan #thihocthuc
+                    </p>
+                  </div>
+                </div>
+                
+                <div class="flex-center-col" style="text-align: center;">
+                  <p style="font-size:12pt; font-weight:700; color:#1E293B; margin-bottom:15px;">Vy bị ảnh hưởng thế nào?<br>Bạn đánh giá ca này ở Thẻ màu nào?</p>
+                  
+                  <button class="btn btn-orange btn-pulse" id="btn-diagnose-9" onclick="revealDiagnosis(9)" style="font-size:12pt; font-weight:800; padding:10px 24px; border-radius:8px; background:var(--orange); color:#FFF; border:none;">🔍 CHẨN ĐOÁN LÂM SÀNG</button>
+                  
+                  <div class="diagnosis-card hidden" id="diagnosis-card-9" style="margin-top:20px; padding:15px 20px; border-radius:10px; background:#FFEDD5; border:2px solid #EA580C; color:#C2410C; font-weight:900; font-size:13pt; display:inline-flex; align-items:center; gap:8px;">
+                    🟠 THẺ CAM (Nguy hiểm vừa - Nguy cơ lan truyền tin đồn bôi nhọ, Vy hoang mang)
+                  </div>
+                </div>
+              </div>
+              <div style="margin-top: 30px; text-align: center;">
+                <button class="btn btn-cyan" onclick="navigateNext()" style="font-size:11pt; padding:10px 24px; font-weight:800;">CA TIẾP THEO <i class="fa-solid fa-arrow-right"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 10 — Ca bệnh 3: Nam -->
+      <section class="slide" id="slide-10" data-stage="TRẠM 1: KHỞI ĐỘNG (ĐO MẦM BỆNH)" data-role="Bác sĩ Cộng đồng">
+        <div class="slide-layout flex-center-col text-center">
+          <div class="slide-frame">
+            <div class="slide-header">
+              <span class="breadcrumb">Bệnh án quét triệu chứng 03</span>
+              <h2 class="slide-title">CA BỆNH 03 — BẠN NAM</h2>
+            </div>
+            <div class="slide-content-container">
+              <div class="grid-2col" style="text-align: left; align-items: center;">
+                <div>
+                  <div class="glass-panel" style="border-left: 4px solid var(--coral); margin-bottom: 20px;">
+                    <h4 style="color:var(--coral); font-weight:800; font-size:12pt; margin-bottom:5px;">📋 HỒ SƠ LÂM SÀNG</h4>
+                    <p style="font-size:11pt; color:#475569; line-height:1.5;">Bạn Nam bị tự ý quay lén cảnh ngủ gật há hốc mồm trong lớp rồi phát tán rộng rãi lên mạng TikTok kèm nhạc chế giễu bêu rếu.</p>
+                  </div>
+                  
+                  <!-- TikTok Video Mockup -->
+                  <div class="tiktok-mock" style="background:#000000; border-radius:12px; overflow:hidden; border:2px solid #E2E8F0; width:100%; max-width:280px; height:180px; position:relative; display:flex; flex-direction:column; justify-content:center; align-items:center;">
+                    <div style="font-size:32pt; color:#FFF;"><i class="fa-solid fa-video-slash"></i></div>
+                    <span style="font-size:8pt; color:#94A3B8; margin-top:5px;">[Video TikTok chụp lén chế giễu]</span>
+                    <div style="position:absolute; bottom:10px; left:10px; color:#FFF; font-size:7.5pt; text-align:left;">
+                      <div style="font-weight:bold;">@troll_lop6a</div>
+                      <div>Nam ngủ gật siêu đỉnh cao lớp 6A 😂 #troll #funny</div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="flex-center-col" style="text-align: center;">
+                  <p style="font-size:12pt; font-weight:700; color:#1E293B; margin-bottom:15px;">Đánh giá mức độ nguy hại của Nam?<br>Bạn chọn tấm thẻ màu nào?</p>
+                  
+                  <button class="btn btn-pulse" id="btn-diagnose-10" onclick="revealDiagnosis(10)" style="font-size:12pt; font-weight:800; padding:10px 24px; border-radius:8px; background:var(--coral); color:#FFF; border:none;">🔍 CHẨN ĐOÁN LÂM SÀNG</button>
+                  
+                  <div class="diagnosis-card hidden" id="diagnosis-card-10" style="margin-top:20px; padding:15px 20px; border-radius:10px; background:#FEE2E2; border:2px solid #DC2626; color:#991B1B; font-weight:900; font-size:13pt; display:inline-flex; align-items:center; gap:8px;">
+                    🔴 THẺ ĐỎ (Cấp cứu khẩn cấp - Xâm hại riêng tư nghiêm trọng, Nam xấu hổ)
+                  </div>
+                </div>
+              </div>
+              <div style="margin-top: 30px; text-align: center;">
+                <button class="btn btn-cyan" onclick="navigateNext()" style="font-size:11pt; padding:10px 24px; font-weight:800;">TỔNG KẾT <i class="fa-solid fa-arrow-right"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 11 — Tổng kết triệu chứng -->
+      <section class="slide" id="slide-11" data-stage="TRẠM 1: KHỞI ĐỘNG (ĐO MẦM BỆNH)" data-role="Bác sĩ Cộng đồng">
+        <div class="slide-layout flex-center-col text-center">
+          <div class="slide-frame" style="max-width:950px;">
+            <div class="slide-header">
+              <span class="breadcrumb">Đúc kết y khoa lâm sàng</span>
+              <h2 class="slide-title">TỔNG KẾT TRIỆU CHỨNG LÂM SÀNG</h2>
+            </div>
+            <div class="slide-content-container">
+              <div class="glass-panel text-left" style="border-left: 4px solid var(--cyan); padding:20px; margin-bottom:25px;">
+                <p style="font-size:12pt; color:#1E293B; line-height:1.6; margin:0;">
+                  Bác sĩ đúc kết: Cả 3 bệnh nhân Tú, Vy và Nam đều bị làm phiền, bị quấy rối không mong muốn qua mạng xã hội. Đây chính là hành vi <strong>Bắt nạt mạng (Cyberbullying)</strong>. Nếu tự xử lý sai cách (im lặng chịu đựng hoặc đáp trả thô bạo), mầm bệnh sẽ biến chứng trầm trọng tổn hại tâm lý học đường.
+                </p>
+              </div>
+              
+              <div class="grid-3col" style="margin-top: 20px;">
+                <div class="glass-panel" style="border-top:4px solid var(--amber); padding:15px; text-align:center;">
+                  <span style="font-size:24pt;">🟡</span>
+                  <h4 style="color:var(--amber); font-weight:800; font-size:11pt; margin-top:8px;">NGUY CƠ NHẸ</h4>
+                  <p style="font-size:9.5pt; color:#64748B; margin-top:5px;">Tin nhắn trêu chọc ẩn danh lẻ tẻ, ảnh hưởng tâm lý ban đầu.</p>
+                </div>
+                <div class="glass-panel" style="border-top:4px solid var(--orange); padding:15px; text-align:center;">
+                  <span style="font-size:24pt;">🟠</span>
+                  <h4 style="color:var(--orange); font-weight:800; font-size:11pt; margin-top:8px;">NGUY CƠ VỪA</h4>
+                  <p style="font-size:9.5pt; color:#64748B; margin-top:5px;">Tin đồn vô căn cứ lan truyền trên nhóm cộng đồng công khai.</p>
+                </div>
+                <div class="glass-panel" style="border-top:4px solid var(--coral); padding:15px; text-align:center;">
+                  <span style="font-size:24pt;">🔴</span>
+                  <h4 style="color:var(--coral); font-weight:800; font-size:11pt; margin-top:8px;">BÁO ĐỘNG ĐỎ</h4>
+                  <p style="font-size:9.5pt; color:#64748B; margin-top:5px;">Xâm hại quyền riêng tư (quay lén), chế giễu danh tính diện rộng.</p>
+                </div>
+              </div>
+
+              <div style="margin-top: 30px; text-align: center;">
+                <button class="btn btn-cyan btn-pulse" onclick="navigateNext()" style="font-size:13pt; padding:12px 28px; font-weight:800; text-transform:uppercase;">SANG CHẶNG 2 <i class="fa-solid fa-forward"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 12 — Thử thách 2: Lộ trình -->
+      <section class="slide" id="slide-12" data-stage="TRẠM 2: KHÁM LÂM SÀNG (PHÂN LOẠI)" data-role="Bác sĩ Cộng đồng">
+        <div class="slide-layout flex-center-col text-center">
+          <div class="slide-frame">
+            <div class="slide-header">
+              <span class="breadcrumb">Giao ban chuyên khoa</span>
+              <h2 class="slide-title">THỬ THÁCH 2: BẢN ĐỒ LỘ TRÌNH ỨNG XỬ</h2>
+            </div>
+            <div class="slide-content-container">
+              <div class="grid-2col" style="text-align: left; align-items: center;">
+                <div>
+                  <div class="active-stage-indicator" style="background:rgba(2,132,199,0.08); border-color:var(--cyan); color:var(--cyan); align-self:flex-start; margin-bottom:15px;">CHỈ THỊ KÍP TRỰC</div>
+                  <h4 style="font-size:13pt; color:#0F172A; font-weight:800; margin-bottom:10px;">📋 NỘI DUNG THỬ THÁCH</h4>
+                  <p style="font-size:11pt; color:#475569; line-height:1.6;">
+                    Các nhóm kíp trực cùng nhau thảo luận, phân loại <strong>10 Thẻ hành động</strong> ứng xử vào đúng lối đi: <strong>Lối đi An toàn (Kháng thể)</strong> hoặc <strong>Lối đi Nguy hiểm (Mầm bệnh)</strong> trên sơ đồ A3.
+                  </p>
+                  <div class="glass-panel" style="border-left: 4px solid var(--purple); padding:15px; margin-top:15px;">
+                    <h5 style="color:var(--purple); font-weight:800; font-size:10.5pt; margin-bottom:5px;">👥 PHÂN CÔNG VAI TRÒ NHÓM:</h5>
+                    <ul style="padding-left:20px; font-size:10pt; color:#475569; display:flex; flex-direction:column; gap:4px; margin:0;">
+                      <li><strong>Trưởng nhóm:</strong> Chỉ huy điều phối thảo luận nhóm.</li>
+                      <li><strong>Thư ký:</strong> Ghi chép kết quả, thực hiện dán thẻ hành động.</li>
+                      <li><strong>Bác sĩ thành viên:</strong> Thảo luận đưa lập luận y khoa.</li>
+                    </ul>
+                  </div>
+                </div>
+                
+                <div class="flex-center-col">
+                  <!-- Chibi Doctor Team SVG -->
+                  <svg class="cartoon-illustration-svg" viewBox="0 0 200 200" style="width: 220px; height: 220px;">
+                    <circle cx="100" cy="100" r="80" fill="#F5F3FF" opacity="0.7"/>
+                    <circle cx="70" cy="100" r="20" fill="#FDBA74"/>
+                    <path d="M 55,90 Q 70,75 85,90" fill="none" stroke="#B45309" stroke-width="8" stroke-linecap="round"/>
+                    <circle cx="130" cy="100" r="20" fill="#FCA5A5"/>
+                    <path d="M 115,90 Q 130,75 145,90" fill="none" stroke="#1E293B" stroke-width="8" stroke-linecap="round"/>
+                    <circle cx="100" cy="90" r="24" fill="#FED7AA"/>
+                    <path d="M 72,76 Q 100,50 128,76" fill="none" stroke="#7C2D12" stroke-width="12" stroke-linecap="round"/>
+                    <rect x="85" y="70" width="30" height="5" fill="#38BDF8" rx="1"/>
+                    <circle cx="100" cy="72" r="5" fill="#E2E8F0" stroke="#0284C7" stroke-width="1.5"/>
+                    <path d="M 64,100 Q 70,103 76,100" fill="none" stroke="#1E293B" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M 124,100 Q 130,103 136,100" fill="none" stroke="#1E293B" stroke-width="2" stroke-linecap="round"/>
+                    <circle cx="93" cy="90" r="2" fill="#1E293B"/>
+                    <circle cx="107" cy="90" r="2" fill="#1E293B"/>
+                    <path d="M 100,120 Q 85,135 100,155 Q 115,135 100,120 Z" fill="#FDE047" stroke="#EAB308" stroke-width="2" opacity="0.95"/>
+                    <rect x="95" y="155" width="10" height="6" fill="#94A3B8" rx="1"/>
+                  </svg>
+                  <span style="font-size: 11pt; font-weight: 800; color: var(--cyan); margin-top: 15px; text-transform: uppercase;">Nhóm 4 - 5 Bác Sĩ</span>
+                </div>
+              </div>
+              
+              <div style="margin-top: 30px; text-align: center;">
+                <button class="btn btn-cyan" onclick="navigateNext()" style="font-size:12pt; padding:12px 28px; font-weight:800; text-transform:uppercase;">TIẾP TỤC <i class="fa-solid fa-arrow-right"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 13 — Từ điển 5 loại virus Cyber -->
+      <section class="slide" id="slide-13" data-stage="TRẠM 2: KHẤM LÂM SÀNG (PHÂN LOẠI)" data-role="Bác sĩ Cộng đồng">
+        <div class="slide-layout flex-center-col text-center">
+          <div class="slide-frame" style="max-width: 1000px;">
+            <div class="slide-header">
+              <span class="breadcrumb">Tra cứu kiến thức chuẩn Nova</span>
+              <h2 class="slide-title">TỪ ĐIỂN 5 LOẠI VIRUS CYBER</h2>
+            </div>
+            <div class="slide-content-container">
+              <!-- Dict tab controls -->
+              <div class="dict-tab-selectors" style="display:flex; justify-content:center; gap:8px; flex-wrap:wrap; margin-bottom:20px;">
+                <button class="btn-dict-tab active" onclick="switchDictTab(1)" id="btn-dict-tab-1">🦠 BẮT NẠT LỜI NÓI</button>
+                <button class="btn-dict-tab" onclick="switchDictTab(2)" id="btn-dict-tab-2">🦠 TIN ĐỒN SAI LỆCH</button>
+                <button class="btn-dict-tab" onclick="switchDictTab(3)" id="btn-dict-tab-3">🦠 XÂM PHẠM RIÊNG TƯ</button>
+                <button class="btn-dict-tab" onclick="switchDictTab(4)" id="btn-dict-tab-4">🦠 TẨY CHAY MẠNG</button>
+                <button class="btn-dict-tab" onclick="switchDictTab(5)" id="btn-dict-tab-5">🦠 GIẢ MẠO DANH TÍNH</button>
+              </div>
+              
+              <!-- Tab content viewer -->
+              <div class="glass-panel text-left" id="dict-content-panel" style="padding: 25px; min-height: 150px; border-left:4px solid var(--cyan);">
+                <!-- Dynamic text populated by JS -->
+                <h4 id="dict-content-title" style="color:var(--cyan); font-weight:800; font-size:13pt; margin-bottom:8px;">Bắt nạt bằng lời nói</h4>
+                <p id="dict-content-text" style="font-size:11pt; color:#475569; line-height:1.6; margin:0;">
+                  Sử dụng các tin nhắn, bình luận thô tục, chế giễu ngoại hình, gia cảnh hoặc đe dọa bạo lực trực tuyến (Ví dụ ca bệnh bạn An).
+                </p>
+              </div>
+
+              <div style="margin-top: 30px; text-align: center;">
+                <button class="btn btn-cyan" onclick="navigateNext()" style="font-size:12pt; padding:12px 28px; font-weight:800; text-transform:uppercase;">VÀO TRÒ CHƠI PHÂN LOẠI <i class="fa-solid fa-gamepad"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 14 — Game phân loại -->
+      <section class="slide" id="slide-14" data-stage="TRẠM 2: KHÁM LÂM SÀNG (PHÂN LOẠI)" data-role="Bác sĩ Cộng đồng">
+        <div class="slide-layout flex-center-col text-center">
+          <div class="slide-frame" style="max-width: 1050px;">
+            <div class="slide-header">
+              <span class="breadcrumb">Khởi động kháng thể tự vệ</span>
+              <h2 class="slide-title">GAME: PHÂN LOẠI KHÁNG THỂ & MẦM BỆNH</h2>
+            </div>
+            <div class="slide-content-container">
+              <div class="sorting-game-layout" style="display:grid; grid-template-columns: 2.2fr 1fr; gap:20px; flex:1; width:100%;">
+                
+                <!-- Game Board lanes -->
+                <div class="sorting-game-board" style="display:flex; flex-direction:column; gap:15px;">
+                  <!-- Safe Lane -->
+                  <div class="sorting-lane lane-safe" style="border: 2px solid rgba(16, 185, 129, 0.2); background:rgba(16, 185, 129, 0.02); border-radius:12px; padding:15px; text-align:left; min-height:130px;">
+                    <div style="font-weight:800; font-size:11pt; color:#065F46; border-bottom:1.5px solid rgba(16, 185, 129, 0.15); padding-bottom:6px; margin-bottom:10px;"><i class="fa-solid fa-shield-heart"></i> LỐI ĐI AN TOÀN (KHÁNG THỂ TỐT)</div>
+                    <div class="lane-dropzone" id="lane-safe-dropzone" style="display:flex; gap:8px; flex-wrap:wrap;">
+                      <!-- Snapped cards will append here -->
+                    </div>
+                  </div>
+                  <!-- Danger Lane -->
+                  <div class="sorting-lane lane-danger" style="border: 2px solid rgba(239, 68, 68, 0.2); background:rgba(239, 68, 68, 0.02); border-radius:12px; padding:15px; text-align:left; min-height:130px;">
+                    <div style="font-weight:800; font-size:11pt; color:#991B1B; border-bottom:1.5px solid rgba(239, 68, 68, 0.15); padding-bottom:6px; margin-bottom:10px;"><i class="fa-solid fa-triangle-exclamation"></i> LỐI ĐI NGUY HIỂM (MẦM BỆNH XẤU)</div>
+                    <div class="lane-dropzone" id="lane-danger-dropzone" style="display:flex; gap:8px; flex-wrap:wrap;">
+                      <!-- Snapped cards will append here -->
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Card Bank sidebar -->
+                <div class="sorting-card-bank-panel" style="background:rgba(15,23,42,0.03); border:1px solid rgba(15,23,42,0.08); border-radius:12px; padding:15px; display:flex; flex-direction:column; justify-content:space-between; height:320px; overflow:hidden;">
+                  <div style="font-weight:800; font-size:10.5pt; color:#1E293B; border-bottom:1px solid rgba(15,23,42,0.08); padding-bottom:6px; margin-bottom:10px;"><i class="fa-solid fa-box-open"></i> KHO THẺ HÀNH ĐỘNG</div>
+                  <div class="bank-cards-container" id="sorting-game-bank" style="display:flex; flex-direction:column; gap:8px; overflow-y:auto; flex:1; padding-right:4px;">
+                    <!-- Cards will be populated by JS -->
+                  </div>
+                </div>
+
+              </div>
+              
+              <div style="margin-top: 20px; text-align: center;">
+                <button class="btn btn-cyan" onclick="navigateNext()" style="font-size:11pt; padding:10px 24px; font-weight:800;">THẢO LUẬN NHÓM <i class="fa-solid fa-comments"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 15 — 6 phút thảo luận nhóm -->
+      <section class="slide" id="slide-15" data-stage="TRẠM 2: KHÁM LÂM SÀNG (PHÂN LOẠI)" data-role="Bác sĩ Cộng đồng">
+        <div class="slide-layout flex-center-col text-center">
+          <div class="slide-frame" style="max-width: 850px;">
+            <div class="slide-header">
+              <span class="breadcrumb">Định lượng thảo luận kíp trực</span>
+              <h2 class="slide-title">6 PHÚT THẢO LUẬN NHÓM</h2>
+            </div>
+            <div class="slide-content-container flex-center-col">
+              <p style="font-size: 13.5pt; color:#475569; line-height:1.6; margin-bottom: 25px;">
+                <strong>"Các nhóm kíp trực có 6 phút thảo luận để dán 10 thẻ hành động vào sơ đồ A3 và đề xuất thứ tự phác đồ 5 bước cấp cứu an toàn."</strong>
+              </p>
+              
+              <div class="glass-panel flex-center-col" style="padding: 30px; width: 100%; max-width: 450px; background: rgba(2, 132, 199, 0.03); border: 2px dashed rgba(2, 132, 199, 0.2); border-radius: 20px;">
+                <div class="sorting-timer-num" id="s15-timer-display" style="font-size: 60pt !important; font-family: monospace; font-weight:900; color: var(--cyan); text-shadow: 0 0 15px var(--cyan-glow);">06:00</div>
+                <div style="display:flex; gap:10px; margin-top:20px; width:100%; justify-content:center;">
+                  <button class="btn btn-cyan btn-pulse" id="s15-start-timer-btn" onclick="startS15Timer()" style="font-size:10pt; font-weight:800; padding:8px 18px;">⚡ BẮT ĐẦU</button>
+                  <button class="btn btn-amber" onclick="pauseS15Timer()" style="font-size:10pt; font-weight:800; padding:8px 18px;">TẠM DỪNG</button>
+                  <button class="btn" onclick="resetS15Timer()" style="font-size:10pt; font-weight:800; padding:8px 18px; background:#64748B; color:#FFF;">RESET</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 16 — Xác thực phân loại -->
+      <section class="slide" id="slide-16" data-stage="TRẠM 2: KHÁM LÂM SÀNG (PHÂN LOẠI)" data-role="Bác sĩ Cộng đồng">
+        <div class="slide-layout flex-center-col text-center">
+          <div class="slide-frame" style="max-width: 1000px;">
+            <div class="slide-header">
+              <span class="breadcrumb">Nova Stars Clinic &bull; Kết quả xác thực</span>
+              <h2 class="slide-title">XÁC THỰC PHÂN LOẠI CHUẨN Y KHOA</h2>
+            </div>
+            <div class="slide-content-container">
+              <p style="font-size:11.5pt; color:#64748B; text-align:left; margin-bottom:10px;">👇 Nhấp chuột vào từng dòng hành vi dưới đây để lật mở hệ quả chi tiết:</p>
+              
+              <!-- Consequence reveal table -->
+              <table class="clinical-check-table" style="width:100%; border-collapse: collapse; text-align: left; background:#FFFFFF; border-radius:12px; overflow:hidden; border:1px solid rgba(15,23,42,0.08);">
+                <thead>
+                  <tr style="border-bottom: 2px solid rgba(15,23,42,0.1); font-size:11pt; color: #475569; background:rgba(15,23,42,0.02);">
+                    <th style="padding:10px 15px;">HÀNH VI CỦA HỌC SINH</th>
+                    <th style="padding:10px 15px; width:120px;">PHÂN LOẠI</th>
+                    <th style="padding:10px 15px;">HỆ QUẢ LÂM SÀNG (CLICK ĐỂ XEM)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="consequence-row" onclick="revealConsequence(1)" style="border-bottom: 1px solid rgba(15,23,42,0.05); cursor:pointer;">
+                    <td style="padding:12px 15px; font-weight:700; color:#EF4444; font-size:10pt;">🤫 Im lặng chịu đựng một mình</td>
+                    <td style="padding:12px 15px;"><span style="background:#FEE2E2; color:#DC2626; padding:3px 6px; border-radius:4px; font-weight:800; font-size:8pt;">MẦM BỆNH</span></td>
+                    <td style="padding:12px 15px; font-weight:700; font-size:9.5pt;"><span class="consequence-text hidden" id="consequence-1" style="color:#C2410C;">⚠️ Kẻ xấu lấn lướt, tiếp tục công kích trầm trọng hơn</span></td>
+                  </tr>
+                  <tr class="consequence-row" onclick="revealConsequence(2)" style="border-bottom: 1px solid rgba(15,23,42,0.05); cursor:pointer;">
+                    <td style="padding:12px 15px; font-weight:700; color:#EF4444; font-size:10pt;">🤬 Nhắn tin đe dọa trả đũa lại</td>
+                    <td style="padding:12px 15px;"><span style="background:#FEE2E2; color:#DC2626; padding:3px 6px; border-radius:4px; font-weight:800; font-size:8pt;">MẦM BỆNH</span></td>
+                    <td style="padding:12px 15px; font-weight:700; font-size:9.5pt;"><span class="consequence-text hidden" id="consequence-2" style="color:#C2410C;">⚠️ Biến mình thành kẻ bắt nạt, vi phạm quy tắc nhà trường</span></td>
+                  </tr>
+                  <tr class="consequence-row" onclick="revealConsequence(3)" style="border-bottom: 1px solid rgba(15,23,42,0.05); cursor:pointer;">
+                    <td style="padding:12px 15px; font-weight:700; color:#10B981; font-size:10pt;">🧘 Giữ bình tĩnh & rời màn hình</td>
+                    <td style="padding:12px 15px;"><span style="background:#D1FAE5; color:#065F46; padding:3px 6px; border-radius:4px; font-weight:800; font-size:8pt;">KHÁNG THỂ</span></td>
+                    <td style="padding:12px 15px; font-weight:700; font-size:9.5pt;"><span class="consequence-text hidden" id="consequence-3" style="color:#047857;">✅ Tránh bốc đồng kích động, bảo vệ nhịp tim an toàn</span></td>
+                  </tr>
+                  <tr class="consequence-row" onclick="revealConsequence(4)" style="border-bottom: 1px solid rgba(15,23,42,0.05); cursor:pointer;">
+                    <td style="padding:12px 15px; font-weight:700; color:#10B981; font-size:10pt;">📸 Chụp ảnh màn hình lưu bằng chứng</td>
+                    <td style="padding:12px 15px;"><span style="background:#D1FAE5; color:#065F46; padding:3px 6px; border-radius:4px; font-weight:800; font-size:8pt;">KHÁNG THỂ</span></td>
+                    <td style="padding:12px 15px; font-weight:700; font-size:9.5pt;"><span class="consequence-text hidden" id="consequence-4" style="color:#047857;">✅ Tạo cơ sở pháp lý vững vàng để người lớn xử lý</span></td>
+                  </tr>
+                  <tr class="consequence-row" onclick="revealConsequence(5)" style="border-bottom: 1px solid rgba(15,23,42,0.05); cursor:pointer;">
+                    <td style="padding:12px 15px; font-weight:700; color:#10B981; font-size:10pt;">👪 Chia sẻ với bố mẹ, thầy cô</td>
+                    <td style="padding:12px 15px;"><span style="background:#D1FAE5; color:#065F46; padding:3px 6px; border-radius:4px; font-weight:800; font-size:8pt;">KHÁNG THỂ</span></td>
+                    <td style="padding:12px 15px; font-weight:700; font-size:9.5pt;"><span class="consequence-text hidden" id="consequence-5" style="color:#047857;">✅ Giải tỏa tâm lý, kích hoạt lá chắn bảo vệ từ nhà trường</span></td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div style="margin-top: 25px; text-align: center;">
+                <button class="btn btn-cyan" onclick="navigateNext()" style="font-size:11pt; padding:10px 24px; font-weight:800;">XEM PHÁC ĐỒ CHUẨN <i class="fa-solid fa-shield"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 17 — Phác đồ 5 bước -->
+      <section class="slide" id="slide-17" data-stage="TRẠM 2: KHÁM LÂM SÀNG (PHÂN LOẠI)" data-role="Bác sĩ Cộng đồng">
+        <div class="slide-layout flex-center-col text-center">
+          <div class="slide-frame" style="max-width: 1000px;">
+            <div class="slide-header">
+              <span class="breadcrumb">Quy trình cấp cứu y khoa an ninh mạng</span>
+              <h2 class="slide-title">SƠ ĐỒ PHÁC ĐỒ CẤP CỨU 5 BƯỚC</h2>
+            </div>
+            <div class="slide-content-container flex-center-col" style="justify-content: space-evenly; flex: 1;">
+              <p style="font-size:12pt; color:#64748B; margin-bottom:10px;">👇 Di chuột hoặc chạm tay vào từng bước để hiển thị phác đồ chi tiết:</p>
+              
+              <!-- Timeline layout -->
+              <div class="phacdo-flow-container" style="display:flex; justify-content:space-between; align-items:center; width:100%; position:relative; padding: 20px 0;">
+                <div style="position:absolute; top:50%; left:5%; width:90%; height:4px; background:linear-gradient(90deg, var(--cyan) 0%, var(--pink) 100%); z-index:1; transform:translateY(-50%);"></div>
+                
+                <!-- Step 1 -->
+                <div class="phacdo-step-card" onmouseenter="focusStep(1)" style="z-index:2; width:18%; background:#FFFFFF; border:1.5px solid rgba(15,23,42,0.08); border-radius:12px; padding:15px 10px; cursor:pointer; transition:all 0.3s; position:relative;">
+                  <div style="width:40px; height:40px; border-radius:50%; background:var(--cyan); color:#FFF; display:flex; align-items:center; justify-content:center; margin:0 auto 10px; font-weight:900;">1</div>
+                  <h4 style="font-size:9.5pt; font-weight:800; color:#0F172A; margin:0;">🧘 GIỮ BÌNH TĨNH</h4>
+                </div>
+                <!-- Step 2 -->
+                <div class="phacdo-step-card" onmouseenter="focusStep(2)" style="z-index:2; width:18%; background:#FFFFFF; border:1.5px solid rgba(15,23,42,0.08); border-radius:12px; padding:15px 10px; cursor:pointer; transition:all 0.3s; position:relative;">
+                  <div style="width:40px; height:40px; border-radius:50%; background:var(--purple); color:#FFF; display:flex; align-items:center; justify-content:center; margin:0 auto 10px; font-weight:900;">2</div>
+                  <h4 style="font-size:9.5pt; font-weight:800; color:#0F172A; margin:0;">📸 LƯU BẰNG CHỨNG</h4>
+                </div>
+                <!-- Step 3 -->
+                <div class="phacdo-step-card" onmouseenter="focusStep(3)" style="z-index:2; width:18%; background:#FFFFFF; border:1.5px solid rgba(15,23,42,0.08); border-radius:12px; padding:15px 10px; cursor:pointer; transition:all 0.3s; position:relative;">
+                  <div style="width:40px; height:40px; border-radius:50%; background:var(--amber); color:#FFF; display:flex; align-items:center; justify-content:center; margin:0 auto 10px; font-weight:900;">3</div>
+                  <h4 style="font-size:9.5pt; font-weight:800; color:#0F172A; margin:0;">🚫 CHẶN & BÁO CÁO</h4>
+                </div>
+                <!-- Step 4 -->
+                <div class="phacdo-step-card" onmouseenter="focusStep(4)" style="z-index:2; width:18%; background:#FFFFFF; border:1.5px solid rgba(15,23,42,0.08); border-radius:12px; padding:15px 10px; cursor:pointer; transition:all 0.3s; position:relative;">
+                  <div style="width:40px; height:40px; border-radius:50%; background:var(--pink); color:#FFF; display:flex; align-items:center; justify-content:center; margin:0 auto 10px; font-weight:900;">4</div>
+                  <h4 style="font-size:9.5pt; font-weight:800; color:#0F172A; margin:0;">👪 TÌM NGƯỜI LỚN</h4>
+                </div>
+                <!-- Step 5 -->
+                <div class="phacdo-step-card" onmouseenter="focusStep(5)" style="z-index:2; width:18%; background:#FFFFFF; border:1.5px solid rgba(15,23,42,0.08); border-radius:12px; padding:15px 10px; cursor:pointer; transition:all 0.3s; position:relative;">
+                  <div style="width:40px; height:40px; border-radius:50%; background:var(--mint); color:#FFF; display:flex; align-items:center; justify-content:center; margin:0 auto 10px; font-weight:900;">5</div>
+                  <h4 style="font-size:9.5pt; font-weight:800; color:#0F172A; margin:0;">⚽ HÀNH ĐỘNG TỐT</h4>
+                </div>
+              </div>
+              
+              <!-- Step detailed text block -->
+              <div class="glass-panel text-left" id="step-detail-card" style="padding: 20px; width: 100%; max-width: 800px; min-height: 80px; border-left: 4px solid var(--cyan);">
+                <p style="font-size: 11pt; color: #475569; font-weight:700; margin:0;" id="step-detail-text">
+                  Hover chuột lên từng bước trên sơ đồ để xem diễn giải hành động y khoa chi tiết của từng bước.
+                </p>
+              </div>
+
+              <div style="margin-top: 20px;">
+                <button class="btn btn-cyan" onclick="navigateNext()" style="font-size:12pt; padding:12px 28px; font-weight:800; text-transform:uppercase;">TRẠM CHẾ TẠO <i class="fa-solid fa-wrench"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 18 — Trạm chế tạo -->
+      <section class="slide" id="slide-18" data-stage="TRẠM 3: CHẾ TẠO (SẢN XUẤT THẺ GẬP)" data-role="Bác sĩ Cộng đồng">
+        <div class="slide-layout flex-center-col text-center">
+          <div class="slide-frame">
+            <div class="slide-header">
+              <span class="breadcrumb">Xưởng sản xuất truyền thông</span>
+              <h2 class="slide-title">TRẠM CHẾ TẠO: THẺ GẬP BIẾN HÌNH</h2>
+            </div>
+            <div class="slide-content-container">
+              <div class="grid-2col" style="text-align: left; align-items: center;">
+                <div>
+                  <h4 style="font-size:12pt; color:#0F172A; font-weight:800; margin-bottom:10px;">📋 KỸ THUẬT CHẾ TẠO</h4>
+                  <ul style="padding-left:20px; font-size:10.5pt; color:#475569; display:flex; flex-direction:column; gap:10px; margin:0;">
+                    <li><strong>Bước 1:</strong> Gấp đôi và xếp quạt dải giấy bìa màu cứng thành 5 nếp gấp quạt quạt đều nhau tạo phôi lật mở biến hình.</li>
+                    <li><strong>Bước 2:</strong> Vẽ các mũi tên chỉ đường liên kết chạy dọc xuyên suốt các nếp gập gấp.</li>
+                    <li><strong>Bước 3:</strong> Điền 5 bước phác đồ cấp cứu kèm vẽ icon minh họa tại mỗi nếp gập tương tác.</li>
+                    <li><strong>Bước 4:</strong> Viết slogan bảo vệ mạng xã hội ở bìa sau.</li>
+                  </ul>
+                </div>
+                
+                <div class="flex-center-col">
+                  <!-- CSS accordion simulation -->
+                  <div class="accordion-paper-simulation" id="accordion-demo-view">
+                    <div class="paper-fold" onclick="toggleAccordionDemo(this)"><div class="paper-fold-icon">🧘</div>BƯỚC 1</div>
+                    <div class="paper-fold" onclick="toggleAccordionDemo(this)"><div class="paper-fold-icon">📸</div>BƯỚC 2</div>
+                    <div class="paper-fold" onclick="toggleAccordionDemo(this)"><div class="paper-fold-icon">🚫</div>BƯỚC 3</div>
+                    <div class="paper-fold" onclick="toggleAccordionDemo(this)"><div class="paper-fold-icon">👪</div>BƯỚC 4</div>
+                    <div class="paper-fold" onclick="toggleAccordionDemo(this)"><div class="paper-fold-icon">⚽</div>BƯỚC 5</div>
+                  </div>
+                  <span style="font-size:9.5pt; color:#64748B; margin-top:15px;">👉 Click vào từng nếp gấp phía trên để thử lật mở biến hình</span>
+                </div>
+              </div>
+              
+              <div style="margin-top: 30px; text-align: center;">
+                <button class="btn btn-cyan" onclick="navigateNext()" style="font-size:12pt; padding:12px 28px; font-weight:800; text-transform:uppercase;">KÍCH HOẠT THỜI GIAN THI CÔNG <i class="fa-solid fa-clock"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 19 — 9 phút thi công sản phẩm -->
+      <section class="slide" id="slide-19" data-stage="TRẠM 3: CHẾ TẠO (SẢN XUẤT THẺ GẬP)" data-role="Bác sĩ Cộng đồng">
+        <div class="slide-layout flex-center-col text-center">
+          <div class="slide-frame">
+            <div class="slide-header">
+              <span class="breadcrumb">Đếm ngược hoạt động nhóm</span>
+              <h2 class="slide-title">9 PHÚT THI CÔNG SẢN PHẨM</h2>
+            </div>
+            <div class="slide-content-container">
+              <div class="grid-2col" style="align-items: center; text-align: left;">
+                <div class="flex-center-col" style="background: rgba(2, 132, 199, 0.03); border: 2px dashed rgba(2, 132, 199, 0.2); border-radius: 20px; padding: 30px;">
+                  <div class="sorting-timer-num" id="s19-timer-display" style="font-size: 60pt !important; font-family: monospace; font-weight:900; color: var(--cyan); text-shadow: 0 0 15px var(--cyan-glow);">09:00</div>
+                  <div style="display:flex; gap:10px; margin-top:20px; width:100%; justify-content:center;">
+                    <button class="btn btn-cyan btn-pulse" id="s19-start-timer-btn" onclick="startS19Timer()" style="font-size:10pt; font-weight:800; padding:8px 18px;">⚡ THI CÔNG</button>
+                    <button class="btn btn-amber" onclick="pauseS19Timer()" style="font-size:10pt; font-weight:800; padding:8px 18px;">TẠM DỪNG</button>
+                    <button class="btn" onclick="resetS19Timer()" style="font-size:10pt; font-weight:800; padding:8px 18px; background:#64748B; color:#FFF;">RESET</button>
+                  </div>
+                </div>
+                
+                <div style="display:flex; flex-direction:column; gap:12px; padding-left:20px;">
+                  <p style="font-size:12.5pt; color:#1E293B; font-weight:800; margin:0;">🎨 HƯỚNG DẪN KÍP TRỰC:</p>
+                  <p style="font-size:11pt; color:#475569; margin:0; line-height:1.5;">
+                    "Các kíp trực có đúng 9 phút để thực hiện gấp giấy, điền phác đồ và trang trí Sơ đồ thẻ gập của nhóm mình. Hãy phân vai gấp quạt, dán sticker và ghi chú thật nhanh!"
+                  </p>
+                  
+                  <!-- Workbench SVG representation -->
+                  <div style="display:flex; justify-content:center; margin-top:10px;">
+                    <svg class="cartoon-illustration-svg" viewBox="0 0 200 100" style="width:200px; height:80px;">
+                      <rect x="20" y="30" width="160" height="40" rx="8" fill="#FFF7ED" stroke="#B45309" stroke-width="3"/>
+                      <line x1="50" y1="30" x2="150" y2="30" stroke="#10B981" stroke-width="4" stroke-linecap="round"/>
+                      <circle cx="65" cy="50" r="8" fill="none" stroke="#EF4444" stroke-width="2.5"/>
+                      <circle cx="73" cy="55" r="8" fill="none" stroke="#EF4444" stroke-width="2.5"/>
+                      <rect x="110" y="40" width="40" height="20" rx="2" fill="#38BDF8"/>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              
+              <div style="margin-top: 30px; text-align: center;">
+                <button class="btn btn-cyan" onclick="navigateNext()" style="font-size:11pt; padding:10px 24px; font-weight:800;">BÁO CÁO NGHIỆM THU <i class="fa-solid fa-bullhorn"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 20 — Spotlight trình bày -->
+      <section class="slide" id="slide-20" data-stage="TRẠM 4: CAM KẾT (KÝ VACCINE MẠNG)" data-role="Bác sĩ Cộng đồng">
+        <div class="slide-layout flex-center-col text-center">
+          <div class="slide-frame" id="slide-20-frame">
+            <div class="slide-header">
+              <span class="breadcrumb">Bục thuyết trình hội đồng</span>
+              <h2 class="slide-title">ĐÈN SPOTLIGHT TRÌNH BÀY SẢN PHẨM</h2>
+            </div>
+            <div class="slide-content-container flex-center-col">
+              <p style="font-size: 14pt; color:#475569; max-width:700px; margin-bottom:30px;">
+                Trưởng khoa công bố: <strong>"Đã hết giờ chế tạo! Mời đại diện các kíp trực lên bục thuyết trình, trình bày thiết kế và lật mở Thẻ gập biến hình của nhóm mình trước Hội đồng!"</strong>
+              </p>
+              
+              <!-- Spotlight Podium card -->
+              <div class="glass-panel flex-center-col" id="presenter-podium" style="padding:40px; width:100%; max-width:450px; background:#FFFFFF; border:2.5px solid rgba(15,23,42,0.1); border-radius:24px; transition:all 0.5s;">
+                <div style="font-size:42pt; color:var(--cyan); margin-bottom:15px;"><i class="fa-solid fa-microphone-lines"></i></div>
+                <h3 style="font-size:16pt; font-weight:900; color:#0F172A; margin:0;">BỤC PHÁT BIỂU KÍP TRỰC</h3>
+                <p style="font-size:10.5pt; color:#64748B; margin-top:8px;">Bác sĩ đại diện trình bày dải giấy lật mở</p>
+              </div>
+              
+              <div style="display:flex; gap:12px; margin-top:40px;">
+                <button class="btn btn-purple" id="btn-spotlight-toggle" onclick="toggleSpotlight()" style="font-size:12pt; padding:12px 28px; font-weight:800;"><i class="fa-solid fa-lightbulb"></i> BẬT ĐÈN SPOTLIGHT</button>
+                <button class="btn btn-cyan" onclick="navigateNext()" style="font-size:12pt; padding:12px 28px; font-weight:800;">NHẬT KÝ BÁC SĨ <i class="fa-solid fa-book"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 21 — Nhật ký phản chiếu -->
+      <section class="slide" id="slide-21" data-stage="TRẠM 4: CAM KẾT (KÝ VACCINE MẠNG)" data-role="Bác sĩ Cộng đồng">
+        <div class="slide-layout flex-center-col text-center">
+          <div class="slide-frame">
+            <div class="slide-header">
+              <span class="breadcrumb">Tự phản chiếu cá nhân (Reflection)</span>
+              <h2 class="slide-title">4 PHÚT HOÀN THÀNH NHẬT KÝ BÁC SĨ</h2>
+            </div>
+            <div class="slide-content-container">
+              <div class="grid-2col" style="align-items: center; text-align: left;">
+                <div class="glass-panel" style="border-left: 4px solid var(--purple); padding:25px; display:flex; flex-direction:column; gap:12px;">
+                  <h4 style="color:var(--purple); font-weight:800; font-size:12pt; margin:0;"><i class="fa-solid fa-pencil"></i> CÂU HỎI PHẢN TƯ:</h4>
+                  <p style="font-size:11.5pt; color:#1E293B; line-height:1.6; font-weight:700; margin:0;">
+                    "Nếu bản thân hoặc bạn bè gặp rắc rối bị làm khó chịu trên mạng, em sẽ dùng Sơ đồ thẻ gập này để hướng dẫn xử lý như thế nào? Điều gì khiến em suy nghĩ nhiều nhất?"
+                  </p>
+                  <p style="font-size:10.5pt; color:#64748B; margin:0; line-height:1.5;">
+                    Bác sĩ lật mặt sau Sơ đồ thẻ gập, dành 4 phút độc lập viết nhật ký phản chiếu cá nhân.
+                  </p>
+                </div>
+                
+                <div class="flex-center-col" style="background: rgba(2, 132, 199, 0.03); border: 2px dashed rgba(2, 132, 199, 0.2); border-radius: 20px; padding: 30px;">
+                  <div class="sorting-timer-num" id="s21-timer-display" style="font-size: 54pt !important; font-family: monospace; font-weight:900; color: var(--cyan); text-shadow: 0 0 15px var(--cyan-glow);">04:00</div>
+                  <div style="display:flex; gap:10px; margin-top:20px; width:100%; justify-content:center;">
+                    <button class="btn btn-cyan btn-pulse" id="s21-start-timer-btn" onclick="startS21Timer()" style="font-size:9.5pt; font-weight:800; padding:8px 16px;">⚡ KHỞI ĐỘNG NHẠC</button>
+                    <button class="btn btn-amber" onclick="pauseS21Timer()" style="font-size:9.5pt; font-weight:800; padding:8px 16px;">TẠM DỪNG</button>
+                    <button class="btn" onclick="resetS21Timer()" style="font-size:9.5pt; font-weight:800; padding:8px 16px; background:#64748B; color:#FFF;">RESET</button>
+                  </div>
+                </div>
+              </div>
+              
+              <div style="margin-top: 30px; text-align: center;">
+                <button class="btn btn-cyan" onclick="navigateNext()" style="font-size:12pt; padding:12px 28px; font-weight:800; text-transform:uppercase;">3 NGUYÊN TẮC VÀNG <i class="fa-solid fa-medal"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 22 — 3 Nguyên tắc vàng -->
+      <section class="slide" id="slide-22" data-stage="TRẠM 4: CAM KẾT (KÝ VACCINE MẠNG)" data-role="Bác sĩ Cộng đồng">
+        <div class="slide-layout flex-center-col text-center">
+          <div class="slide-frame" style="max-width: 1000px;">
+            <div class="slide-header">
+              <span class="breadcrumb">Khởi động kháng thể vững vàng</span>
+              <h2 class="slide-title">ĐỒNG THANH: 3 NGUYÊN TẮC VÀNG</h2>
+            </div>
+            <div class="slide-content-container flex-center-col" style="justify-content: space-evenly; flex: 1;">
+              <p style="font-size:13pt; color:#64748B; margin-bottom:10px;">👇 Cả lớp đứng dậy đồng thanh. Click từng tấm khiên bảo vệ để kích hoạt âm thanh kim loại:</p>
+              
+              <!-- 3 shields grid -->
+              <div class="grid-3col" style="width:100%; margin-top:20px; gap:25px;">
+                <!-- Shield 1 -->
+                <div class="shield-card shield-red" id="shield-card-1" onclick="clickGoldenShield(1)" style="border-top:4px solid #EF4444;">
+                  <div style="font-size:36pt; color:#EF4444; margin-bottom:15px;"><i class="fa-solid fa-shield-halved"></i></div>
+                  <h4 style="font-size:12pt; font-weight:900; color:#1E293B; margin-bottom:8px;">NGUYÊN TẮC 1</h4>
+                  <p style="font-size:14pt; font-weight:900; color:#B91C1C; margin:0;" class="shield-title-reveal">KHÔNG TỰ TRÁCH BẢN THÂN!</p>
+                </div>
+                <!-- Shield 2 -->
+                <div class="shield-card shield-orange" id="shield-card-2" onclick="clickGoldenShield(2)" style="border-top:4px solid #F97316;">
+                  <div style="font-size:36pt; color:#F97316; margin-bottom:15px;"><i class="fa-solid fa-shield-halved"></i></div>
+                  <h4 style="font-size:12pt; font-weight:900; color:#1E293B; margin-bottom:8px;">NGUYÊN TẮC 2</h4>
+                  <p style="font-size:14pt; font-weight:900; color:#C2410C; margin:0;" class="shield-title-reveal">KHÔNG ĐÁP TRẢ KẺ XẤU!</p>
+                </div>
+                <!-- Shield 3 -->
+                <div class="shield-card shield-green" id="shield-card-3" onclick="clickGoldenShield(3)" style="border-top:4px solid #10B981;">
+                  <div style="font-size:36pt; color:#10B981; margin-bottom:15px;"><i class="fa-solid fa-shield-halved"></i></div>
+                  <h4 style="font-size:12pt; font-weight:900; color:#1E293B; margin-bottom:8px;">NGUYÊN TẮC 3</h4>
+                  <p style="font-size:14pt; font-weight:900; color:#047857; margin:0;" class="shield-title-reveal">KHÔNG ÂM THẦM CHỊU ĐỰNG!</p>
+                </div>
+              </div>
+
+              <div style="margin-top: 30px;">
+                <button class="btn btn-cyan" onclick="navigateNext()" style="font-size:12pt; padding:12px 28px; font-weight:800; text-transform:uppercase;">KÝ CAM KẾT VACCINE MẠNG <i class="fa-solid fa-signature"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 23 — Ký cam kết -->
+      <section class="slide" id="slide-23" data-stage="TRẠM 4: CAM KẾT (KÝ VACCINE MẠNG)" data-role="Bác sĩ Cộng đồng">
+        <div class="slide-layout flex-center-col text-center">
+          <div class="slide-frame" style="max-width: 950px; position:relative; overflow:hidden;">
+            
+            <!-- Stamp APPROVED overlay -->
+            <div id="pledge-stamp-approved-overlay" class="hidden" style="position:absolute; top:25%; left:35%; transform:scale(3) rotate(-20deg); opacity:0; z-index:100; pointer-events:none; transition:all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);">
+              <div style="border:6px solid #EF4444; color:#EF4444; font-family:'Montserrat',sans-serif; font-size:38pt; font-weight:900; padding:10px 30px; text-transform:uppercase; border-radius:12px; background:rgba(255,255,255,0.9); box-shadow:0 10px 30px rgba(239,68,68,0.3); text-shadow:0 0 10px rgba(239,68,68,0.1);">APPROVED</div>
+            </div>
+
+            <div class="slide-header">
+              <span class="breadcrumb">Kích hoạt lá chắn bảo vệ trường học</span>
+              <h2 class="slide-title">KÝ TÊN CAM KẾT VACCINE MẠNG</h2>
+            </div>
+            <div class="slide-content-container">
+              <div class="grid-2col" style="text-align: left; align-items: stretch;">
+                <div class="glass-panel" style="border-left: 4px solid var(--pink); padding:20px; display:flex; flex-direction:column; justify-content:space-between;">
+                  <div>
+                    <h4 style="color:var(--pink); font-weight:800; font-size:12pt; margin-bottom:15px;">📜 BẢN CAM KẾT BÁC SĨ</h4>
+                    <div style="display:flex; flex-direction:column; gap:12px;">
+                      <label style="display:flex; align-items:center; gap:10px; font-size:10.5pt; font-weight:700; color:#475569; cursor:pointer;">
+                        <input type="checkbox" class="pledge-checkbox" onchange="togglePledgeCheckbox()" style="width:20px; height:20px;">
+                        <span>Tôi cam kết luôn áp dụng Sơ đồ 5 bước khi bị làm phiền.</span>
+                      </label>
+                      <label style="display:flex; align-items:center; gap:10px; font-size:10.5pt; font-weight:700; color:#475569; cursor:pointer;">
+                        <input type="checkbox" class="pledge-checkbox" onchange="togglePledgeCheckbox()" style="width:20px; height:20px;">
+                        <span>Tôi cam kết luôn tôn trọng quyền riêng tư của bạn bè.</span>
+                      </label>
+                      <label style="display:flex; align-items:center; gap:10px; font-size:10.5pt; font-weight:700; color:#475569; cursor:pointer;">
+                        <input type="checkbox" class="pledge-checkbox" onchange="togglePledgeCheckbox()" style="width:20px; height:20px;">
+                        <span>Tôi cam kết lan tỏa 3 nguyên tắc vàng tới cộng đồng mạng.</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="glass-panel flex-center-col" style="padding:15px; border-left:4px solid var(--cyan); position:relative;">
+                  <h4 style="color:var(--cyan); font-weight:800; font-size:11.5pt; margin-bottom:10px; align-self:flex-start;"><i class="fa-solid fa-signature"></i> CHỮ KÝ PHÒNG TIÊM CHỦNG</h4>
+                  <canvas id="sig-pad-canvas" width="280" height="120" style="border: 1.5px dashed rgba(15,23,42,0.1); border-radius:10px; background:#F8FAFC; cursor:crosshair; width:280px; height:120px;"></canvas>
+                  <div style="display:flex; gap:10px; margin-top:10px; width:100%; justify-content:center;">
+                    <button class="btn" onclick="clearSignatureCanvas()" style="font-size:8pt; padding:6px 14px; background:#64748B; color:#FFF; font-weight:800; border-radius:6px;">XÓA CHỮ KÝ</button>
+                    <button class="btn btn-pulse" id="btn-stamp-pledge" onclick="performPledgeStamping()" disabled style="font-size:8pt; padding:6px 14px; background:#EF4444; color:#FFF; font-weight:800; border-radius:6px; border:none;">KÝ & ĐÓNG DẤU</button>
+                  </div>
+                </div>
+              </div>
+              
+              <div style="margin-top: 25px; text-align: center;">
+                <button class="btn btn-cyan" onclick="navigateNext()" style="font-size:11pt; padding:10px 24px; font-weight:800;">HOÀN THÀNH <i class="fa-solid fa-flag-checkered"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 24 — Hoàn thành nhiệm vụ -->
+      <section class="slide" id="slide-24" data-stage="TRẠM 4: CAM KẾT (KÝ VACCINE MẠNG)" data-role="Bác sĩ Cộng đồng">
+        <div class="slide-layout flex-center-col text-center">
+          <div class="slide-frame" style="max-width: 900px; position:relative;">
+            <!-- Canvas Confetti Overlay -->
+            <canvas id="graduation-confetti-canvas" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:10;"></canvas>
+
+            <div class="slide-header">
+              <span class="breadcrumb" style="color:var(--mint) !important;"><i class="fa-solid fa-circle-check"></i> Chiến dịch thành công rực rỡ</span>
+              <h2 class="slide-title" style="color:#065F46 !important; font-weight:900;">CHÚC MỪNG KÍP TRỰC HOÀN THÀNH NHỆM VỤ!</h2>
+            </div>
+            <div class="slide-content-container flex-center-col" style="z-index:2; position:relative;">
+              <div style="font-size:48pt; color:#EAB308; margin-bottom:15px; animation: pulse-glow 1.5s infinite alternate;"><i class="fa-solid fa-star"></i></div>
+              
+              <div class="glass-panel text-center" style="max-width: 750px; padding: 25px; border-top: 4px solid var(--mint); background: rgba(16, 185, 129, 0.05);">
+                <p style="font-size: 13.5pt; color: #065F46; font-weight: 800; line-height: 1.6;">
+                  "Bắt nạt mạng là một loại bệnh truyền nhiễm tâm lý học đường. Kích hoạt Sơ đồ 5 bước và chia sẻ ngay với người lớn chính là liều vaccine mạnh mẽ nhất để bảo vệ em và cộng đồng học đường."
+                </p>
+              </div>
+              
+              <div style="display:flex; gap:15px; margin-top:35px;">
+                <button class="btn btn-cyan btn-pulse" onclick="triggerCongratsFireworks()" style="font-size:12pt; padding:12px 28px; font-weight:800; text-transform:uppercase;"><i class="fa-solid fa-fireworks"></i> BẮN PHÁO VINH DANH</button>
+                <a href="index.html" class="btn" style="font-size:12pt; padding:12px 28px; font-weight:800; text-transform:uppercase; background:#64748B; color:#FFF; text-decoration:none; display:inline-flex; align-items:center; gap:8px;">HẸN GẶP LẠI <i class="fa-solid fa-door-open"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="tiet2.js"></script>
+</body>
+</html>
