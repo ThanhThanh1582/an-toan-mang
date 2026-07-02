@@ -626,7 +626,7 @@
                 <div class="flex-center-col" style="text-align: center;">
                   <p style="font-size:12pt; font-weight:700; color:#1E293B; margin-bottom:15px;">Vy bị ảnh hưởng thế nào?<br>Bạn đánh giá ca này ở Thẻ màu nào?</p>
                   
-                  <button class="btn btn-orange btn-pulse" id="btn-diagnose-9" onclick="revealDiagnosis(9)" style="font-size:12pt; font-weight:800; padding:10px 24px; border-radius:8px; background:var(--orange); color:#FFF; border:none;">🔍 CHẨN ĐOÁN LÂM SÀNG</button>
+                  <button class="btn btn-surface btn-pulse" id="btn-diagnose-9" onclick="revealDiagnosis(9)" style="font-size:12pt; font-weight:800; padding:10px 24px; border-radius:8px;">🔍 CHẨN ĐOÁN LÂM SÀNG</button>
                   
                   <div class="diagnosis-card hidden" id="diagnosis-card-9" style="margin-top:20px; padding:15px 20px; border-radius:10px; background:#FFEDD5; border:2px solid #EA580C; color:#C2410C; font-weight:900; font-size:13pt; display:inline-flex; align-items:center; gap:8px;">
                     🟠 THẺ CAM (Nguy hiểm vừa - Nguy cơ lan truyền tin đồn bôi nhọ, Vy hoang mang)
@@ -671,7 +671,7 @@
                 <div class="flex-center-col" style="text-align: center;">
                   <p style="font-size:12pt; font-weight:700; color:#1E293B; margin-bottom:15px;">Đánh giá mức độ nguy hại của Nam?<br>Bạn chọn tấm thẻ màu nào?</p>
                   
-                  <button class="btn btn-pulse" id="btn-diagnose-10" onclick="revealDiagnosis(10)" style="font-size:12pt; font-weight:800; padding:10px 24px; border-radius:8px; background:var(--coral); color:#FFF; border:none;">🔍 CHẨN ĐOÁN LÂM SÀNG</button>
+                  <button class="btn btn-surface btn-pulse" id="btn-diagnose-10" onclick="revealDiagnosis(10)" style="font-size:12pt; font-weight:800; padding:10px 24px; border-radius:8px;">🔍 CHẨN ĐOÁN LÂM SÀNG</button>
                   
                   <div class="diagnosis-card hidden" id="diagnosis-card-10" style="margin-top:20px; padding:15px 20px; border-radius:10px; background:#FEE2E2; border:2px solid #DC2626; color:#991B1B; font-weight:900; font-size:13pt; display:inline-flex; align-items:center; gap:8px;">
                     🔴 THẺ ĐỎ (Cấp cứu khẩn cấp - Xâm hại riêng tư nghiêm trọng, Nam xấu hổ)
@@ -858,7 +858,8 @@
 
               </div>
               
-              <div style="margin-top: 20px; text-align: center;">
+              <div style="margin-top: 20px; text-align: center; display:flex; justify-content:center; gap:15px;">
+                <button class="btn btn-surface" id="btn-check-sorting" onclick="checkSortingAnswers()" style="font-size:11pt; padding:10px 24px; font-weight:800;">🔍 KIỂM TRA ĐÁP ÁN</button>
                 <button class="btn btn-cyan" onclick="navigateNext()" style="font-size:11pt; padding:10px 24px; font-weight:800;">THẢO LUẬN NHÓM <i class="fa-solid fa-comments"></i></button>
               </div>
             </div>
